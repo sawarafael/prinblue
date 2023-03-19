@@ -1,4 +1,4 @@
-package com.prinblue;
+package com.melk_de_sousa.prinblue;
 
 import android.os.Build;
 import android.os.Bundle;

@@ -5,6 +5,25 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "plugins": [],
+    "android": {
+      "permissions": [
+        "BLUETOOTH_ADMIN",
+        "BLUETOOTH_CONNECT",
+        "ACCESS_COARSE_LOCATION",
+        "BLUETOOTH_ADVERTISE",
+        "BLUETOOTH_SCAN",
+        "BLUETOOTH",
+        "ACCESS_FINE_LOCATION",
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.BLUETOOTH_CONNECT"
+      ],
+      "package": "com.melk_de_sousa.prinblue"
+    },
+    "ios": {
+      "bundleIdentifier": "prinblue"
+    }
   }
 }
