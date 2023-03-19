@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "prinblue",
+    "slug": "prinblue",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
