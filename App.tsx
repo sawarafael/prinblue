@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ActivityIndicator, FlatList, Switch, Text, View } from 'react-native'
+import { ActivityIndicator, FlatList, PermissionsAndroid, Switch, Text, View } from 'react-native'
 import { bleManager } from './src/adapters/blue-manager'
 
 export default function App() {
@@ -14,6 +14,10 @@ export default function App() {
       bleManager.stopScan()
     }
   }, [scanning])
+
+  useEffect(() => {
+    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
+  }, [])
 
   return (
     <View>
