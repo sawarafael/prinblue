@@ -24,6 +24,11 @@
     },
     "ios": {
       "bundleIdentifier": "prinblue"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a405269a-e39b-4a52-81ea-7ab6e3b87828"
+      }
     }
   }
 }
