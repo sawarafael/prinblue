@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ActivityIndicator, FlatList, Switch, Text, View } from 'react-native'
+import { ActivityIndicator, FlatList, PermissionsAndroid, Switch, Text, View } from 'react-native'
 import EscPosPrinter, { IPrinter } from 'react-native-esc-pos-printer'
 
 type Device = {
@@ -21,8 +21,10 @@ export default function App() {
   const hasDevices = devices.length > 0
 
   const scan = async () => {
-    EscPosPrinter.discover()
-      .then((printers) => setDevices(printers.map(toDevice)))
+    EscPosPrinter.discover({
+      scanningTimeoutAndroid: 30000,
+    })
+      .then(console.log)
       .catch((e) => console.error(e))
       .finally(() => setScanning(false))
   }
@@ -32,6 +34,14 @@ export default function App() {
       scan()
     }
   }, [scanning])
+
+  useEffect(() => {
+    PermissionsAndroid.requestMultiple([
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+      PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
+    ])
+  }, [])
 
   return (
     <View
