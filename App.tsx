@@ -1,38 +1,19 @@
 import { useEffect, useState } from 'react'
 import { ActivityIndicator, FlatList, PermissionsAndroid, Switch, Text, View } from 'react-native'
-import EscPosPrinter, { IPrinter } from 'react-native-esc-pos-printer'
-
-type Device = {
-  name: string
-  ip: string
-  mac: string
-}
-
-const toDevice = (rawPrinter: IPrinter): Device => ({
-  ip: rawPrinter.ip,
-  mac: rawPrinter.mac,
-  name: rawPrinter.name,
-})
+import { bleManager } from './src/adapters/blue-manager'
 
 export default function App() {
   const [scanning, setScanning] = useState(false)
-  const [devices, setDevices] = useState<Device[]>([])
 
-  const hasDevices = devices.length > 0
-
-  const scan = async () => {
-    EscPosPrinter.discover({
-      scanningTimeoutAndroid: 30000,
-    })
-      .then(console.log)
-      .catch((e) => console.error(e))
-      .finally(() => setScanning(false))
-  }
+  const hasDevices = bleManager.devices.length > 0
 
   useEffect(() => {
     if (scanning) {
-      scan()
+      bleManager.scan()
+      return
     }
+
+    bleManager.stopScan()
   }, [scanning])
 
   useEffect(() => {
@@ -59,10 +40,10 @@ export default function App() {
 
       {!hasDevices && (
         <FlatList
-          data={devices}
+          data={bleManager.devices}
           renderItem={({ item }) => (
             <Text>
-              {item.mac} - {item.name}
+              {item.id} - {item.name}
             </Text>
           )}
         />
